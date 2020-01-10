@@ -26,11 +26,22 @@ class SearchViewController: UIViewController {
         configureLogoImage()
         configureTextField()
         configureSearchActionButton()
+        setupDismissalAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    // MARK: - Actions
+    
+    @objc func pushFollowersListViewController() {
+        guard let userName = userNameTextField.text, !userName.isEmpty else {
+            return
+        }
+        let followersListViewController = FolloverListViewController(userName: userName)
+        navigationController?.pushViewController(followersListViewController, animated: true)
     }
     
     // MARK: - Private functions
@@ -50,6 +61,7 @@ class SearchViewController: UIViewController {
     
     private func configureTextField() {
         view.addSubview(userNameTextField)
+        userNameTextField.delegate = self
         
         NSLayoutConstraint.activate([
             userNameTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -61,6 +73,7 @@ class SearchViewController: UIViewController {
     
     private func configureSearchActionButton() {
         view.addSubview(searchActionButton)
+        searchActionButton.addTarget(self, action: #selector(pushFollowersListViewController), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             searchActionButton.heightAnchor.constraint(equalToConstant: 50),
@@ -68,5 +81,20 @@ class SearchViewController: UIViewController {
             searchActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             searchActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
+    }
+    
+    private func setupDismissalAction() {
+        let tapGesture = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension SearchViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowersListViewController()
+        return true
     }
 }

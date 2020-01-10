@@ -16,6 +16,7 @@
 		5770569423C8A44000DCEF7A /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569323C8A44000DCEF7A /* FavoritesListViewController.swift */; };
 		5770569723C8B30000DCEF7A /* GHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569623C8B30000DCEF7A /* GHButton.swift */; };
 		5770569923C8B3E300DCEF7A /* GHTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569823C8B3E300DCEF7A /* GHTextField.swift */; };
+		5770569B23C8CC2800DCEF7A /* FolloverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569A23C8CC2800DCEF7A /* FolloverListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5770569323C8A44000DCEF7A /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		5770569623C8B30000DCEF7A /* GHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHButton.swift; sourceTree = "<group>"; };
 		5770569823C8B3E300DCEF7A /* GHTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHTextField.swift; sourceTree = "<group>"; };
+		5770569A23C8CC2800DCEF7A /* FolloverListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolloverListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				5770568B23C88A8C00DCEF7A /* Info.plist */,
 				5770569123C8A42A00DCEF7A /* SearchViewController.swift */,
 				5770569323C8A44000DCEF7A /* FavoritesListViewController.swift */,
+				5770569A23C8CC2800DCEF7A /* FolloverListViewController.swift */,
 			);
 			path = GHFollowers;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				5770569223C8A42A00DCEF7A /* SearchViewController.swift in Sources */,
 				5770569423C8A44000DCEF7A /* FavoritesListViewController.swift in Sources */,
 				5770568023C88A8A00DCEF7A /* SceneDelegate.swift in Sources */,
+				5770569B23C8CC2800DCEF7A /* FolloverListViewController.swift in Sources */,
 				5770569923C8B3E300DCEF7A /* GHTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
