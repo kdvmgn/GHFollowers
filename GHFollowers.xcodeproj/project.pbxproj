@@ -10,17 +10,15 @@
 		5770567E23C88A8A00DCEF7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770567D23C88A8A00DCEF7A /* AppDelegate.swift */; };
 		5770568023C88A8A00DCEF7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770567F23C88A8A00DCEF7A /* SceneDelegate.swift */; };
 		5770568223C88A8A00DCEF7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770568123C88A8A00DCEF7A /* ViewController.swift */; };
-		5770568523C88A8A00DCEF7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5770568323C88A8A00DCEF7A /* Main.storyboard */; };
 		5770568723C88A8C00DCEF7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5770568623C88A8C00DCEF7A /* Assets.xcassets */; };
 		5770568A23C88A8C00DCEF7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5770568823C88A8C00DCEF7A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5770567A23C88A8A00DCEF7A /* GHFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5770567A23C88A8A00DCEF7A /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5770567D23C88A8A00DCEF7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5770567F23C88A8A00DCEF7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5770568123C88A8A00DCEF7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5770568423C88A8A00DCEF7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5770568623C88A8C00DCEF7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5770568923C88A8C00DCEF7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5770568B23C88A8C00DCEF7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +46,7 @@
 		5770567B23C88A8A00DCEF7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5770567A23C88A8A00DCEF7A /* GHFollowers.app */,
+				5770567A23C88A8A00DCEF7A /* GitHub.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,7 +57,6 @@
 				5770567D23C88A8A00DCEF7A /* AppDelegate.swift */,
 				5770567F23C88A8A00DCEF7A /* SceneDelegate.swift */,
 				5770568123C88A8A00DCEF7A /* ViewController.swift */,
-				5770568323C88A8A00DCEF7A /* Main.storyboard */,
 				5770568623C88A8C00DCEF7A /* Assets.xcassets */,
 				5770568823C88A8C00DCEF7A /* LaunchScreen.storyboard */,
 				5770568B23C88A8C00DCEF7A /* Info.plist */,
@@ -84,7 +81,7 @@
 			);
 			name = GHFollowers;
 			productName = GHFollowers;
-			productReference = 5770567A23C88A8A00DCEF7A /* GHFollowers.app */;
+			productReference = 5770567A23C88A8A00DCEF7A /* GitHub.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -127,7 +124,6 @@
 			files = (
 				5770568A23C88A8C00DCEF7A /* LaunchScreen.storyboard in Resources */,
 				5770568723C88A8C00DCEF7A /* Assets.xcassets in Resources */,
-				5770568523C88A8A00DCEF7A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5770568323C88A8A00DCEF7A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5770568423C88A8A00DCEF7A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5770568823C88A8C00DCEF7A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +280,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.dmitryKuleshov.GHFollowers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GitHub;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -310,7 +298,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.dmitryKuleshov.GHFollowers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GitHub;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
