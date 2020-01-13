@@ -20,7 +20,7 @@ class GHAlertViewController: UIViewController {
     
     var padding: CGFloat = 20.0
     
-    let containerView = UIView()
+    let containerView = GHContainerView()
     
     lazy var titleLabel = GHTitleLabel(text: alertTitle, textAlignment: .center, fontSize: 20)
     
@@ -63,11 +63,7 @@ class GHAlertViewController: UIViewController {
     
     private func configureContainerView() {
         view.addSubview(containerView)
-        containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 16
-        containerView.layer.borderWidth = 2
-        containerView.layer.borderColor = UIColor.white.cgColor
-        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
