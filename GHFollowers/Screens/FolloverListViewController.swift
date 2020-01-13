@@ -30,6 +30,15 @@ class FolloverListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        
+        NetworkManager.shared.getFollowers(for: userName, page: 1) { (followers, error) in
+            guard let followers = followers else {
+                self.presentGHAlert(title: "Bad stuff happend", message: error ?? "Error", buttonTitle: "OK")
+                return
+            }
+            print("Followers.count = \(followers.count)")
+            print(followers)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
