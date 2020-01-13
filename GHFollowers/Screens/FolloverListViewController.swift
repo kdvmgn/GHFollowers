@@ -32,10 +32,14 @@ class FolloverListViewController: UIViewController {
         configure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     // MARK: - Private functions
 
     private func configure() {
-        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
         title = userName
