@@ -38,6 +38,7 @@ class SearchViewController: UIViewController {
     
     @objc func pushFollowersListViewController() {
         guard let userName = userNameTextField.text, !userName.isEmpty else {
+            presentGHAlert(title: "Empty username", message: "Please enter a user name& We need to know who to look for", buttonTitle: "OK")
             return
         }
         let followersListViewController = FolloverListViewController(userName: userName)
