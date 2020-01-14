@@ -31,13 +31,14 @@ class FolloverListViewController: UIViewController {
         super.viewDidLoad()
         configure()
         
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { (followers, error) in
-            guard let followers = followers else {
-                self.presentGHAlert(title: "Bad stuff happend", message: error ?? "Error", buttonTitle: "OK")
-                return
+        NetworkManager.shared.getFollowers(for: userName, page: 1) { (result) in
+            switch result {
+            case .success(let followers):
+                print("Followers.count = \(followers.count)")
+                print(followers)
+            case .failure(let error):
+                self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
-            print("Followers.count = \(followers.count)")
-            print(followers)
         }
     }
     
