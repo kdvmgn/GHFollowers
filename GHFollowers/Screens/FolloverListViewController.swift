@@ -14,6 +14,8 @@ class FolloverListViewController: UIViewController {
     
     let userName: String
     
+    var collectionView: UICollectionView!
+    
     // MARK: - Initializer
     
     init(userName: String) {
@@ -29,17 +31,9 @@ class FolloverListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-        
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { (result) in
-            switch result {
-            case .success(let followers):
-                print("Followers.count = \(followers.count)")
-                print(followers)
-            case .failure(let error):
-                self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
-            }
-        }
+        configureView()
+        configureCollectionView()
+        fetchFollowers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,9 +43,27 @@ class FolloverListViewController: UIViewController {
     
     // MARK: - Private functions
 
-    private func configure() {
+    private func configureView() {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
         title = userName
+    }
+    
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .systemPink
+    }
+    
+    private func fetchFollowers() {
+        NetworkManager.shared.getFollowers(for: userName, page: 1) { (result) in
+            switch result {
+            case .success(let followers):
+                print("Followers.count = \(followers.count)")
+                print(followers)
+            case .failure(let error):
+                self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
     }
 }
