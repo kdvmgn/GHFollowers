@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FollowerCellProtocol {
+    func configureFor(follower: Follower)
+}
+
 class FollowerCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Static properties
@@ -19,8 +23,6 @@ class FollowerCollectionViewCell: UICollectionViewCell {
     let avatarImageView = GHAvatarImageView(frame: .zero)
     
     let usernameLabel = GHTitleLabel(textAlignment: .center, fontSize: 16.0)
-    
-    let padding: CGFloat = 8.0
     
     // MARK: - Initiaizer
     
@@ -39,6 +41,8 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         addSubview(avatarImageView)
         addSubview(usernameLabel)
         
+        let padding: CGFloat = 8.0
+        
         NSLayoutConstraint.activate([
             avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
@@ -48,7 +52,18 @@ class FollowerCollectionViewCell: UICollectionViewCell {
             usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12.0),
             usernameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             usernameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            usernameLabel.heightAnchor.constraint(equalToConstant: 20.0)
+            usernameLabel.heightAnchor.constraint(equalToConstant: 24.0)
         ])
+    }
+}
+
+// MARK: - FollowerCellProtocol
+
+extension FollowerCollectionViewCell: FollowerCellProtocol {
+    
+    // MARK: - Functions
+    
+    func configureFor(follower: Follower) {
+        usernameLabel.text = follower.login
     }
 }

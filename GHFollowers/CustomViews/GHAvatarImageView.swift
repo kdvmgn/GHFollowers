@@ -27,5 +27,6 @@ class GHAvatarImageView: UIImageView {
         layer.cornerRadius = 10
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
+        image = #imageLiteral(resourceName: "avatar-placeholder")
     }
 }
