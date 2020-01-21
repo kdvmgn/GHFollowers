@@ -62,23 +62,10 @@ class FolloverListViewController: UIViewController {
     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds,
-                                          collectionViewLayout: createThreeColumnsLayout())
+                                          collectionViewLayout: UIHelper.createThreeColumnsLayout(in: view))
         collectionView.register(FollowerCollectionViewCell.self, forCellWithReuseIdentifier: FollowerCollectionViewCell.reusableID)
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
-    }
-    
-    private func createThreeColumnsLayout() -> UICollectionViewFlowLayout {
-        let width: CGFloat = view.bounds.width
-        let padding: CGFloat = 12.0
-        let minimumItemSpacing: CGFloat = 10.0
-        let availableWidth: CGFloat = width - (2 * padding) - (2 * minimumItemSpacing)
-        let itemWidth: CGFloat = availableWidth / 3
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        return flowLayout
     }
     
     private func setupDataSource() {
@@ -101,15 +88,15 @@ class FolloverListViewController: UIViewController {
     }
     
     private func fetchFollowers() {
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { (result) in
+        NetworkManager.shared.getFollowers(for: userName, page: 1) { [weak self] (result) in
             switch result {
             case .success(let followers):
                 print("Followers.count = \(followers.count)")
                 print(followers)
-                self.followers = followers
-                self.updateData()
+                self?.followers = followers
+                self?.updateData()
             case .failure(let error):
-                self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
+                self?.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
         }
     }
