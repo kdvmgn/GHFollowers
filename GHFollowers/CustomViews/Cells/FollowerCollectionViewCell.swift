@@ -65,5 +65,6 @@ extension FollowerCollectionViewCell: FollowerCellProtocol {
     
     func configureFor(follower: Follower) {
         usernameLabel.text = follower.login
+        avatarImageView.fetchImage(from: follower.avatarUrl)
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Dmitry Kuleshov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
@@ -14,7 +14,9 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     
-    let baseUrl: String = "https://api.github.com/users/"
+    let imageCache = NSCache<NSString, UIImage>()
+    
+    private let baseUrl: String = "https://api.github.com/users/"
     
     // MARK: - Privatr initializer
     
