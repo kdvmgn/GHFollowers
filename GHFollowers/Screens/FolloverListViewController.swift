@@ -93,7 +93,9 @@ class FolloverListViewController: UIViewController {
     }
     
     private func fetchFollowers(userName: String, page: Int) {
+        showLoadingView()
         NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] (result) in
+            self?.dismissLoadingView()
             switch result {
             case .success(let followers):
                 print("Followers.count = \(followers.count)")

@@ -64,3 +64,4 @@ class GHAvatarImageView: UIImageView {
         image = #imageLiteral(resourceName: "avatar-placeholder")
     }
 }
+ 
