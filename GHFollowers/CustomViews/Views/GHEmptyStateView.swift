@@ -27,7 +27,7 @@ class GHEmptyStateView: UIView {
         messageLabel.text = message
         configure()
     }
-    
+     
     func configure() {
         addSubview(messageLabel)
         addSubview(logoImageView)
