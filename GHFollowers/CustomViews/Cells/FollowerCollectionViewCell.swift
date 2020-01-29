@@ -35,6 +35,12 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lify cycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarImageView.image = #imageLiteral(resourceName: "avatar-placeholder")
+    }
     // MARK: - Private functions
     
     private func configure() {

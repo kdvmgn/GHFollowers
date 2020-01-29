@@ -22,6 +22,10 @@ class FolloverListViewController: UIViewController {
     
     var followers: [Follower] = []
     
+    var hasMoreFollowers: Bool = true
+    
+    var page: Int = 1
+    
     var collectionView: UICollectionView!
     
     var dataSource: UICollectionViewDiffableDataSource<FollowersSection, Follower>!
@@ -43,7 +47,7 @@ class FolloverListViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         configureCollectionView()
-        fetchFollowers()
+        fetchFollowers(userName: userName, page: page)
         setupDataSource()
     }
     
@@ -66,6 +70,7 @@ class FolloverListViewController: UIViewController {
         collectionView.register(FollowerCollectionViewCell.self, forCellWithReuseIdentifier: FollowerCollectionViewCell.reusableID)
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
+        collectionView.delegate = self
     }
     
     private func setupDataSource() {
@@ -87,17 +92,36 @@ class FolloverListViewController: UIViewController {
         }
     }
     
-    private func fetchFollowers() {
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { [weak self] (result) in
+    private func fetchFollowers(userName: String, page: Int) {
+        NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] (result) in
             switch result {
             case .success(let followers):
                 print("Followers.count = \(followers.count)")
                 print(followers)
-                self?.followers = followers
+                self?.hasMoreFollowers = followers.count == 100
+                self?.followers.append(contentsOf: followers)
                 self?.updateData()
             case .failure(let error):
                 self?.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
+        }
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension FolloverListViewController: UICollectionViewDelegate {
+    
+    // MARK: - Functions
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let contentHeight: CGFloat = scrollView.contentSize.height
+        let contentOffsetY: CGFloat = scrollView.contentOffset.y
+        let height: CGFloat = scrollView.bounds.size.height
+        
+        if (contentOffsetY > contentHeight - height) && hasMoreFollowers {
+            page += 1
+            fetchFollowers(userName: userName, page: page)
         }
     }
 }
