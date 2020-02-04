@@ -31,13 +31,28 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureDoneButton()
+        getUser()
     }
     
-    // MARK: - Functions
+    // MARK: - Private functions
     
     private func configureDoneButton() {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissView))
         navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    private func getUser() {
+        NetworkManager.shared.getUser(for: userName) { [weak self] (result) in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let user):
+                print("User = \(user)")
+            case .failure(let error):
+                self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
     }
     
     // MARK: - Actions
