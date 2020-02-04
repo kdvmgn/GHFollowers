@@ -14,6 +14,8 @@ class DetailsViewController: UIViewController {
     
     let userName: String
     
+    let headerView = UIView()
+    
     // MARK: - Iniitializer
     
     init(userName: String) {
@@ -30,11 +32,24 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setupView()
         configureDoneButton()
         getUser()
     }
     
     // MARK: - Private functions
+    
+    private func setupView() {
+        view.addSubview(headerView)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 80.0)
+        ])
+    }
     
     private func configureDoneButton() {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissView))
@@ -49,9 +64,23 @@ class DetailsViewController: UIViewController {
             switch result {
             case .success(let user):
                 print("User = \(user)")
+                self.updateInfo(for: user)
             case .failure(let error):
                 self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
+        }
+    }
+    
+    private func add(childViewController: UIViewController, to containerView: UIView) {
+        addChild(childViewController)
+        containerView.addSubview(childViewController.view)
+        childViewController.view.frame = containerView.bounds
+        childViewController.didMove(toParent: self)
+    }
+    
+    private func updateInfo(for user: User) {
+        DispatchQueue.main.async {
+            self.add(childViewController: GHDetailsViewController(user: user), to: self.headerView)
         }
     }
     
