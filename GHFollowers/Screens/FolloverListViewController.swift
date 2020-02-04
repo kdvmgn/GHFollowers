@@ -32,6 +32,10 @@ class FolloverListViewController: UIViewController {
     
     var dataSource: UICollectionViewDiffableDataSource<FollowersSection, Follower>!
     
+    // MARK: - Private properties
+    
+    private var isSearching: Bool = false
+    
     // MARK: - Initializer
     
     init(userName: String) {
@@ -130,6 +134,12 @@ class FolloverListViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
     }
+    
+    private func showInfo(for userName: String) {
+        let userDetailsViewController = DetailsViewController(userName: userName)
+        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+        present(navigationController, animated: true)
+    }
 }
 
 // MARK: - UIScrollViewDelegate
@@ -148,6 +158,12 @@ extension FolloverListViewController: UICollectionViewDelegate {
             fetchFollowers(userName: userName, page: page)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let dataSource = isSearching ? filteredFollowers : followers
+        let follower = dataSource[indexPath.row]
+        showInfo(for: follower.login)
+    }
 }
 
 // MARK: - UISearchResultsUpdating
@@ -160,6 +176,7 @@ extension FolloverListViewController: UISearchResultsUpdating {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             return
         }
+        isSearching = true
         filteredFollowers = followers.filter({$0.login.lowercased().contains(filter.lowercased())})
         updateData(on: filteredFollowers)
     }
@@ -172,6 +189,7 @@ extension FolloverListViewController: UISearchBarDelegate {
     // MARK: - Functions
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-         updateData(on: followers)
+        isSearching = false
+        updateData(on: followers)
     }
 }
