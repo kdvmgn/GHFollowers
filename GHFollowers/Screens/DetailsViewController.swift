@@ -20,6 +20,8 @@ class DetailsViewController: UIViewController {
     
     let followView = UIView()
     
+    let dateLabel = GHBodyLabel(textAlignment: .center)
+    
     var containerViews: [UIView] = []
     
     // MARK: - Iniitializer
@@ -48,7 +50,7 @@ class DetailsViewController: UIViewController {
     private func setupView() {
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 140
-        containerViews = [headerView, repoView, followView]
+        containerViews = [headerView, repoView, followView, dateLabel]
         
         containerViews.forEach({
             view.addSubview($0)
@@ -68,7 +70,10 @@ class DetailsViewController: UIViewController {
             repoView.heightAnchor.constraint(equalToConstant: itemHeight),
             
             followView.topAnchor.constraint(equalTo: repoView.bottomAnchor, constant: padding),
-            followView.heightAnchor.constraint(equalToConstant: itemHeight)
+            followView.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dateLabel.topAnchor.constraint(equalTo: followView.bottomAnchor, constant: padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18.0)
         ])
     }
     
@@ -104,6 +109,7 @@ class DetailsViewController: UIViewController {
             self.add(childViewController: GHDetailsViewController(user: user), to: self.headerView)
             self.add(childViewController: GHRepoViewController(user: user), to: self.repoView)
             self.add(childViewController: GHFollowViewController(user: user), to: self.followView)
+            self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
         }
     }
     
