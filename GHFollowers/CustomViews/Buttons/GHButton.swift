@@ -28,6 +28,13 @@ class GHButton: UIButton {
         configure()
     }
     
+    // MARK: - Functions
+    
+    func setup(title: String, backgroundColor: UIColor) {
+        self.backgroundColor = backgroundColor
+        self.setTitle(title, for: .normal)
+    }
+    
     // MARK: - Private functions
     
     private func configure() {

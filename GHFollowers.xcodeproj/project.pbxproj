@@ -27,7 +27,10 @@
 		5770569723C8B30000DCEF7A /* GHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569623C8B30000DCEF7A /* GHButton.swift */; };
 		5770569923C8B3E300DCEF7A /* GHTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569823C8B3E300DCEF7A /* GHTextField.swift */; };
 		5770569B23C8CC2800DCEF7A /* FolloverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569A23C8CC2800DCEF7A /* FolloverListViewController.swift */; };
-		57DB2E2A23EB13CC00CFBD4C /* GHIitemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DB2E2923EB13CC00CFBD4C /* GHIitemInfoView.swift */; };
+		57DB2E2A23EB13CC00CFBD4C /* GHItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DB2E2923EB13CC00CFBD4C /* GHItemInfoView.swift */; };
+		57DB2E2C23EB182C00CFBD4C /* GHItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DB2E2B23EB182C00CFBD4C /* GHItemInfoViewController.swift */; };
+		57DB2E2F23EB22C600CFBD4C /* GHRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DB2E2E23EB22C600CFBD4C /* GHRepoViewController.swift */; };
+		57DB2E3123EB23B000CFBD4C /* GHFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DB2E3023EB23B000CFBD4C /* GHFollowViewController.swift */; };
 		9E0D195023CE505B002543AA /* GHError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0D194F23CE505B002543AA /* GHError.swift */; };
 		9E5FD09523CCE8AF00C12477 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD09423CCE8AF00C12477 /* Follower.swift */; };
 		9E5FD09723CCE91000C12477 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD09623CCE91000C12477 /* User.swift */; };
@@ -60,7 +63,10 @@
 		5770569623C8B30000DCEF7A /* GHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHButton.swift; sourceTree = "<group>"; };
 		5770569823C8B3E300DCEF7A /* GHTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHTextField.swift; sourceTree = "<group>"; };
 		5770569A23C8CC2800DCEF7A /* FolloverListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolloverListViewController.swift; sourceTree = "<group>"; };
-		57DB2E2923EB13CC00CFBD4C /* GHIitemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHIitemInfoView.swift; sourceTree = "<group>"; };
+		57DB2E2923EB13CC00CFBD4C /* GHItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHItemInfoView.swift; sourceTree = "<group>"; };
+		57DB2E2B23EB182C00CFBD4C /* GHItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHItemInfoViewController.swift; sourceTree = "<group>"; };
+		57DB2E2E23EB22C600CFBD4C /* GHRepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHRepoViewController.swift; sourceTree = "<group>"; };
+		57DB2E3023EB23B000CFBD4C /* GHFollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFollowViewController.swift; sourceTree = "<group>"; };
 		9E0D194F23CE505B002543AA /* GHError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHError.swift; sourceTree = "<group>"; };
 		9E5FD09423CCE8AF00C12477 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		9E5FD09623CCE91000C12477 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -135,7 +141,7 @@
 			children = (
 				5701938123CCC4DE007215A7 /* GHContainerView.swift */,
 				57421CFA23E1CFA3003A6BFC /* GHEmptyStateView.swift */,
-				57DB2E2923EB13CC00CFBD4C /* GHIitemInfoView.swift */,
+				57DB2E2923EB13CC00CFBD4C /* GHItemInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,8 +165,10 @@
 		57421CF923E1CF71003A6BFC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				57DB2E2D23EB22A400CFBD4C /* ItemInfoControllers */,
 				5701937D23CC6601007215A7 /* GHAlertViewController.swift */,
 				571D490A23E9F788004A26C6 /* GHDetailsViewController.swift */,
+				57DB2E2B23EB182C00CFBD4C /* GHItemInfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -208,6 +216,15 @@
 				9E8B8A8523D4B98F00F57272 /* Cells */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		57DB2E2D23EB22A400CFBD4C /* ItemInfoControllers */ = {
+			isa = PBXGroup;
+			children = (
+				57DB2E2E23EB22C600CFBD4C /* GHRepoViewController.swift */,
+				57DB2E3023EB23B000CFBD4C /* GHFollowViewController.swift */,
+			);
+			path = ItemInfoControllers;
 			sourceTree = "<group>";
 		};
 		9E0D194E23CE5048002543AA /* Utilities */ = {
@@ -315,10 +332,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57DB2E3123EB23B000CFBD4C /* GHFollowViewController.swift in Sources */,
 				571D490F23E9FB97004A26C6 /* Constants.swift in Sources */,
 				571D490D23E9F8D7004A26C6 /* GHSecondaryLabel.swift in Sources */,
 				5701938023CC6D95007215A7 /* UIViewController+Extension.swift in Sources */,
 				9E0D195023CE505B002543AA /* GHError.swift in Sources */,
+				57DB2E2C23EB182C00CFBD4C /* GHItemInfoViewController.swift in Sources */,
 				9E5FD09523CCE8AF00C12477 /* Follower.swift in Sources */,
 				57491A5223E9A18B000E2DC8 /* DetailsViewController.swift in Sources */,
 				9EF18F5D23D78BF3000AC3DB /* UIHelper.swift in Sources */,
@@ -329,8 +348,9 @@
 				5770569723C8B30000DCEF7A /* GHButton.swift in Sources */,
 				9E8B8A8923D4BA2600F57272 /* GHAvatarImageView.swift in Sources */,
 				5770569223C8A42A00DCEF7A /* SearchViewController.swift in Sources */,
-				57DB2E2A23EB13CC00CFBD4C /* GHIitemInfoView.swift in Sources */,
+				57DB2E2A23EB13CC00CFBD4C /* GHItemInfoView.swift in Sources */,
 				57421CFB23E1CFA3003A6BFC /* GHEmptyStateView.swift in Sources */,
+				57DB2E2F23EB22C600CFBD4C /* GHRepoViewController.swift in Sources */,
 				5770569423C8A44000DCEF7A /* FavoritesListViewController.swift in Sources */,
 				9E5FD09723CCE91000C12477 /* User.swift in Sources */,
 				5770568023C88A8A00DCEF7A /* SceneDelegate.swift in Sources */,

@@ -12,7 +12,7 @@ enum ItemInfoType {
     case repos, gists, followers, following
 }
 
-class GHIitemInfoView: UIView {
+class GHItemInfoView: UIView {
 
     // MARK: - Properties
     

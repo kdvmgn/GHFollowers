@@ -50,9 +50,6 @@ class DetailsViewController: UIViewController {
         let itemHeight: CGFloat = 140
         containerViews = [headerView, repoView, followView]
         
-        repoView.backgroundColor = .systemPink
-        followView.backgroundColor = .systemBlue
-        
         containerViews.forEach({
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -105,6 +102,8 @@ class DetailsViewController: UIViewController {
     private func updateInfo(for user: User) {
         DispatchQueue.main.async {
             self.add(childViewController: GHDetailsViewController(user: user), to: self.headerView)
+            self.add(childViewController: GHRepoViewController(user: user), to: self.repoView)
+            self.add(childViewController: GHFollowViewController(user: user), to: self.followView)
         }
     }
     
