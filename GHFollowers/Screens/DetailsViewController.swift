@@ -16,6 +16,12 @@ class DetailsViewController: UIViewController {
     
     let headerView = UIView()
     
+    let repoView = UIView()
+    
+    let followView = UIView()
+    
+    var containerViews: [UIView] = []
+    
     // MARK: - Iniitializer
     
     init(userName: String) {
@@ -40,14 +46,32 @@ class DetailsViewController: UIViewController {
     // MARK: - Private functions
     
     private func setupView() {
-        view.addSubview(headerView)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        let padding: CGFloat = 20
+        let itemHeight: CGFloat = 140
+        containerViews = [headerView, repoView, followView]
+        
+        repoView.backgroundColor = .systemPink
+        followView.backgroundColor = .systemBlue
+        
+        containerViews.forEach({
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            ])
+        })
         
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 80.0)
+            headerView.heightAnchor.constraint(equalToConstant: 180.0),
+            
+            repoView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
+            repoView.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            followView.topAnchor.constraint(equalTo: repoView.bottomAnchor, constant: padding),
+            followView.heightAnchor.constraint(equalToConstant: itemHeight)
         ])
     }
     
