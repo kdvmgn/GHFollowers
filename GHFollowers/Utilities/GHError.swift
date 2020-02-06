@@ -1,5 +1,5 @@
 //
-//  ErrorMessage.swift
+//  GHError.swift
 //  GHFollowers
 //
 //  Created by Дмитрий Кулешов on 14.01.2020.
