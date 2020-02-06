@@ -8,11 +8,27 @@
 
 import UIKit
 
+protocol GHFollowViewControllerDelegate: class {
+    func showFollowers(for user: User)
+}
+
 class GHFollowViewController: GHItemInfoViewController {
+    
+    // NARK: - Properties
+    
+    weak var delegate: GHFollowViewControllerDelegate?
+    
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureItem()
+    }
+    
+    // MARK: - Functions
+    
+    override func actionButtonTouched() {
+        delegate?.showFollowers(for: user)
     }
     
     // MARK: - Private functions

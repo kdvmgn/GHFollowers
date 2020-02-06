@@ -18,7 +18,7 @@ class FolloverListViewController: UIViewController {
     
     // MARK: - Properties
     
-    let userName: String
+    var userName: String
     
     var followers: [Follower] = []
     
@@ -137,6 +137,7 @@ class FolloverListViewController: UIViewController {
     
     private func showInfo(for userName: String) {
         let userDetailsViewController = DetailsViewController(userName: userName)
+        userDetailsViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: userDetailsViewController)
         present(navigationController, animated: true)
     }
@@ -191,5 +192,22 @@ extension FolloverListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
         updateData(on: followers)
+    }
+}
+
+// MARK: - DetailsViewControllerDelegate
+
+extension FolloverListViewController: DetailsViewControllerDelegate {
+    
+    // MARK: - Functions
+    
+    func showFollowers(of userName: String) {
+        self.userName = userName
+        title = userName
+        followers.removeAll()
+        filteredFollowers.removeAll()
+        page = 1
+        collectionView.setContentOffset(.zero, animated: true)
+        fetchFollowers(userName: userName, page: page)
     }
 }

@@ -8,11 +8,27 @@
 
 import UIKit
 
+protocol GHRepoViewControllerDelegate: class {
+    func showProfile(for user: User)
+}
+
 class GHRepoViewController: GHItemInfoViewController {
+    
+    // MARK: - Properties
+    
+    weak var delegate: GHRepoViewControllerDelegate?
+    
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureItem()
+    }
+    
+    // MARK: - Functions
+    
+    override func actionButtonTouched() {
+        delegate?.showProfile(for: user)
     }
     
     // MARK: - Private functions

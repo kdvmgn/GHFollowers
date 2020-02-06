@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DetailsViewControllerDelegate: class {
+    func showFollowers(of userName: String)
+}
+
 class DetailsViewController: UIViewController {
     
     // MARK: - Properties
@@ -23,6 +27,8 @@ class DetailsViewController: UIViewController {
     let dateLabel = GHBodyLabel(textAlignment: .center)
     
     var containerViews: [UIView] = []
+    
+    weak var delegate: DetailsViewControllerDelegate?
     
     // MARK: - Iniitializer
     
@@ -106,9 +112,13 @@ class DetailsViewController: UIViewController {
     
     private func updateInfo(for user: User) {
         DispatchQueue.main.async {
+            let repoViewController = GHRepoViewController(user: user)
+            repoViewController.delegate = self
+            let followViewController = GHFollowViewController(user: user)
+            followViewController.delegate = self
             self.add(childViewController: GHDetailsViewController(user: user), to: self.headerView)
-            self.add(childViewController: GHRepoViewController(user: user), to: self.repoView)
-            self.add(childViewController: GHFollowViewController(user: user), to: self.followView)
+            self.add(childViewController: repoViewController, to: self.repoView)
+            self.add(childViewController: followViewController, to: self.followView)
             self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
         }
     }
@@ -117,5 +127,28 @@ class DetailsViewController: UIViewController {
     
     @objc func dismissView() {
         dismiss(animated: true)
+    }
+}
+
+// MARK: - GHRepoViewControllerDelegate
+
+extension DetailsViewController: GHRepoViewControllerDelegate {
+    
+    // MARK: - Functions
+    
+    func showProfile(for user: User) {
+        open(url: URL(string: user.htmlUrl))
+    }
+}
+
+// MARK: - GHFollowViewControllerDelegate
+
+extension DetailsViewController: GHFollowViewControllerDelegate {
+    
+    // MARK: - Functions
+    
+    func showFollowers(for user: User) {
+        delegate?.showFollowers(of: user.login)
+        dismissView()
     }
 }

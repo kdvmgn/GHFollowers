@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 fileprivate var containerView: UIView!
 
@@ -57,5 +58,14 @@ extension UIViewController {
         let emptyStateView = GHEmptyStateView(message: message)
         emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)
+    }
+    
+    func open(url: URL?) {
+        guard let url = url else {
+            presentGHAlert(title: "UPS...", message: "Something went wrong. Try again later", buttonTitle: "OK")
+            return
+        }
+        let safariViewController = SFSafariViewController(url: url)
+        present(safariViewController, animated: true)
     }
 }

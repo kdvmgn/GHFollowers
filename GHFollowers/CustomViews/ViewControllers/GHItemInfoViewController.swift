@@ -40,6 +40,7 @@ class GHItemInfoViewController: UIViewController {
         configureBackground()
         setupView()
         configureStackView()
+        configureActionButton()
     }
     
     // MARK: - Private functions
@@ -76,5 +77,15 @@ class GHItemInfoViewController: UIViewController {
         
         stackView.addArrangedSubview(itemInfoLeft)
         stackView.addArrangedSubview(itemInfoRight)
+    }
+    
+    private func configureActionButton() {
+        actionButton.addTarget(self, action: #selector(actionButtonTouched), for: .touchUpInside)
+    }
+    
+    // MARK: - Actions
+    
+    @objc func actionButtonTouched() {
+        print("GHItemInfoViewController: action button touched")
     }
 }
