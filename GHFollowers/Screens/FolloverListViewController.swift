@@ -69,6 +69,7 @@ class FolloverListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
         title = userName
+        configureAddButton()
     }
     
     private func configureCollectionView() {
@@ -135,11 +136,22 @@ class FolloverListViewController: UIViewController {
         navigationItem.searchController = searchController
     }
     
+    private func configureAddButton() {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
     private func showInfo(for userName: String) {
         let userDetailsViewController = DetailsViewController(userName: userName)
         userDetailsViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: userDetailsViewController)
         present(navigationController, animated: true)
+    }
+    
+     // MARK: - Actions
+    
+    @objc func addButtonTouched() {
+        print("FolloverListViewController: Add button touched")
     }
 }
 
