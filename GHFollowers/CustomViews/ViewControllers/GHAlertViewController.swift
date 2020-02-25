@@ -26,7 +26,7 @@ class GHAlertViewController: UIViewController {
     
     lazy var messageLabel = GHBodyLabel(text: messageTitle, textAlignment: .center)
     
-    lazy var actionButton = GHButton(backgroundColor: .systemPink, title: "OK")
+    lazy var actionButton = GHButton(backgroundColor: .systemPink, title: buttonTitle)
     
     // MARK: - Initializer
     

@@ -151,7 +151,28 @@ class FolloverListViewController: UIViewController {
      // MARK: - Actions
     
     @objc func addButtonTouched() {
-        print("FolloverListViewController: Add button touched")
+        showLoadingView()
+        NetworkManager.shared.getUser(for: userName) { [weak self] (result) in
+            self?.dismissLoadingView()
+            switch result {
+            case .success(let user):
+                let user = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                PersistanceManager.updateWith(favorite: user, actionType: .add) { [weak self] (error) in
+                    if let error = error {
+                        self?.presentGHAlert(title: "Something went wrong",
+                                       message: error.rawValue,
+                                       buttonTitle: "OK")
+                    }
+                    self?.presentGHAlert(title: "Success!",
+                                         message: "You have successfully favorited this user",
+                                         buttonTitle: "Hoooray 🥳")
+                }
+            case .failure(let error):
+                self?.presentGHAlert(title: "Something went wrong!",
+                                     message: error.rawValue,
+                                     buttonTitle: "OK")
+            }
+        }
     }
 }
 

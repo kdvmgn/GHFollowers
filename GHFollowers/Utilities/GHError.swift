@@ -13,4 +13,6 @@ enum GHError: String, Error {
     case invalidRequest = "Unable to complete your request. Please try again later"
     case invalidResponde = "Invalid response from the server. Try again later"
     case invalidData = "The data recived from the server was invalid. Please try again"
+    case unableToFavorite = "There was an error of favoriting user. Try again later"
+    case alreadyFovorited = "This user already added to favorites"
 }
