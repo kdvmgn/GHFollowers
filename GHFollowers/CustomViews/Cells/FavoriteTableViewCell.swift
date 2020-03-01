@@ -22,12 +22,13 @@ class FavoriteTableViewCell: UITableViewCell {
     
     let avatarImageView = GHAvatarImageView(frame: .zero)
     
-    let usernameLabel = GHTitleLabel(textAlignment: .center, fontSize: 26.0)
+    let usernameLabel = GHTitleLabel(textAlignment: .left, fontSize: 26.0)
     
     // MARK: - Initiaizer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -55,7 +56,7 @@ class FavoriteTableViewCell: UITableViewCell {
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
             avatarImageView.heightAnchor.constraint(equalToConstant: 60),
             
-            usernameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 24),
             usernameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             usernameLabel.heightAnchor.constraint(equalToConstant: 40.0),
             usernameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
