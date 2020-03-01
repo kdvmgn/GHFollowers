@@ -32,6 +32,7 @@ class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        userNameTextField.text = nil
     }
     
     // MARK: - Actions
@@ -41,6 +42,7 @@ class SearchViewController: UIViewController {
             presentGHAlert(title: "Empty username", message: "Please enter a user name& We need to know who to look for", buttonTitle: "OK")
             return
         }
+        userNameTextField.resignFirstResponder()
         let followersListViewController = FolloverListViewController(userName: userName)
         navigationController?.pushViewController(followersListViewController, animated: true)
     }
@@ -51,11 +53,11 @@ class SearchViewController: UIViewController {
         view.addSubview(logoImage)
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.image = #imageLiteral(resourceName: "gh-logo")
-        
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20.0 : 80.0
         NSLayoutConstraint.activate([
             logoImage.widthAnchor.constraint(equalToConstant: 200),
             logoImage.heightAnchor.constraint(equalToConstant: 200),
-            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant),
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
