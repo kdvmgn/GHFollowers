@@ -41,6 +41,7 @@
 		9E8B8A8923D4BA2600F57272 /* GHAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8B8A8823D4BA2600F57272 /* GHAvatarImageView.swift */; };
 		9EC55B702405A9B6002A9EE7 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC55B6F2405A9B6002A9EE7 /* PersistanceManager.swift */; };
 		9EF18F5D23D78BF3000AC3DB /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF18F5C23D78BF3000AC3DB /* UIHelper.swift */; };
+		9EF70B1F240BEC97001284F3 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF70B1E240BEC97001284F3 /* FavoriteTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		9E8B8A8823D4BA2600F57272 /* GHAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHAvatarImageView.swift; sourceTree = "<group>"; };
 		9EC55B6F2405A9B6002A9EE7 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		9EF18F5C23D78BF3000AC3DB /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		9EF70B1E240BEC97001284F3 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				9E8B8A8623D4B9BF00F57272 /* FollowerCollectionViewCell.swift */,
+				9EF70B1E240BEC97001284F3 /* FavoriteTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				57DB2E3523EB268F00CFBD4C /* String+Extension.swift in Sources */,
 				9E5FD09523CCE8AF00C12477 /* Follower.swift in Sources */,
 				57491A5223E9A18B000E2DC8 /* DetailsViewController.swift in Sources */,
+				9EF70B1F240BEC97001284F3 /* FavoriteTableViewCell.swift in Sources */,
 				9EF18F5D23D78BF3000AC3DB /* UIHelper.swift in Sources */,
 				5701937A23CC64AB007215A7 /* GHTitleLabel.swift in Sources */,
 				5770568223C88A8A00DCEF7A /* ViewController.swift in Sources */,
