@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FolloverListViewController: UIViewController {
+class FolloverListViewController: GHDataLoadingViewController {
     
     // MARK: - Nested type
     

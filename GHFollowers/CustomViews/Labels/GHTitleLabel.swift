@@ -21,12 +21,11 @@ class GHTitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(text: String? = nil, textAlignment: NSTextAlignment, fontSize: CGFloat) {
-        super.init(frame: .zero)
+    convenience init(text: String? = nil, textAlignment: NSTextAlignment, fontSize: CGFloat) {
+        self.init(frame: .zero)
         self.text = text
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-        configure()
     }
     
     // MARK: - Private functions

@@ -25,36 +25,6 @@ class GHAvatarImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Functions
-    
-    func fetchImage(from urlString: String) {
-        let cacheKey = NSString(string: urlString)
-        if let cachedImage = imageCache.object(forKey: cacheKey) {
-            image = cachedImage
-            return
-        }
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-            guard let self = self,
-                let data = data,
-                let response = response as? HTTPURLResponse,
-                response.statusCode == 200, error == nil,
-                let image = UIImage(data: data) else {
-                return
-            }
-            self.imageCache.setObject(image, forKey: cacheKey)
-            
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        }
-        
-        task.resume()
-    }
-    
     // MARK: - Private functions
     
     private func configure() {

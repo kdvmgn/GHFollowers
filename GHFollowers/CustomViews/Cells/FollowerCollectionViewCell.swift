@@ -61,6 +61,14 @@ class FollowerCollectionViewCell: UICollectionViewCell {
             usernameLabel.heightAnchor.constraint(equalToConstant: 24.0)
         ])
     }
+    
+    private func downloadAvatarImage(from url: String) {
+        NetworkManager.shared.downloadImage(from: url) { [weak self] (image) in
+            DispatchQueue.main.async {
+                self?.avatarImageView.image = image
+            }
+        }
+    }
 }
 
 // MARK: - FollowerCellProtocol
@@ -71,6 +79,6 @@ extension FollowerCollectionViewCell: FollowerCellProtocol {
     
     func configureFor(follower: Follower) {
         usernameLabel.text = follower.login
-        avatarImageView.fetchImage(from: follower.avatarUrl)
+        downloadAvatarImage(from: follower.avatarUrl)
     }
 }

@@ -95,7 +95,7 @@ class GHDetailsViewController: UIViewController {
     }
     
     private func configureView() {
-        avatarImageView.fetchImage(from: user.avatarUrl)
+        downloadAvatarImage()
         userNameLabel.text = user.login
         nameLabel.text = user.name ?? ""
         locationLabel.text = user.location ?? "No location"
@@ -103,5 +103,13 @@ class GHDetailsViewController: UIViewController {
         bioLabel.numberOfLines = 3
         locationImageView.image = UIImage(systemName: SFSymbols.location)
         locationImageView.tintColor = .secondaryLabel
+    }
+    
+    private func downloadAvatarImage() {
+        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] (image) in
+            DispatchQueue.main.async {
+                self?.avatarImageView.image = image
+            }
+        }
     }
 }

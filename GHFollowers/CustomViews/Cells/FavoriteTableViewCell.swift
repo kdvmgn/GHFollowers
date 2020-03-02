@@ -62,6 +62,14 @@ class FavoriteTableViewCell: UITableViewCell {
             usernameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
+    
+    private func downloadAvatarImage(from url: String) {
+        NetworkManager.shared.downloadImage(from: url) { [weak self] (image) in
+            DispatchQueue.main.async {
+                self?.avatarImageView.image = image
+            }
+        }
+    }
 }
 
 // MARK: - FavoriteCellProtocol
@@ -72,6 +80,6 @@ extension FavoriteTableViewCell: FavoriteCellProtocol {
     
     func configureFor(favotite: Follower) {
         usernameLabel.text = favotite.login
-        avatarImageView.fetchImage(from: favotite.avatarUrl)
+        downloadAvatarImage(from: favotite.avatarUrl)
     }
 }

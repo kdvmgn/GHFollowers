@@ -12,7 +12,7 @@ protocol DetailsViewControllerDelegate: class {
     func showFollowers(of userName: String)
 }
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: GHDataLoadingViewController {
     
     // MARK: - Properties
     
@@ -119,7 +119,7 @@ class DetailsViewController: UIViewController {
             self.add(childViewController: GHDetailsViewController(user: user), to: self.headerView)
             self.add(childViewController: repoViewController, to: self.repoView)
             self.add(childViewController: followViewController, to: self.followView)
-            self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())"
+            self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
         }
     }
     
