@@ -39,8 +39,9 @@ class FavoriteTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarImageView.image = #imageLiteral(resourceName: "avatar-placeholder")
+        avatarImageView.image = Images.placeholder
     }
+    
     // MARK: - Private functions
     
     private func configure() {

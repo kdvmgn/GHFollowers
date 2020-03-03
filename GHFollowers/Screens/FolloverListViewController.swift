@@ -26,6 +26,8 @@ class FolloverListViewController: GHDataLoadingViewController {
     
     var hasMoreFollowers: Bool = true
     
+    var isLoadingInProcess: Bool = false
+    
     var page: Int = 1
     
     var collectionView: UICollectionView!
@@ -102,6 +104,7 @@ class FolloverListViewController: GHDataLoadingViewController {
     
     private func fetchFollowers(userName: String, page: Int) {
         showLoadingView()
+        isLoadingInProcess = true
         NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] (result) in
             guard let self = self else {
                 return
@@ -124,13 +127,13 @@ class FolloverListViewController: GHDataLoadingViewController {
             case .failure(let error):
                 self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
+            self.isLoadingInProcess = false
         }
     }
     
     private func configureSearchController () {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search for a username"
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
@@ -187,7 +190,7 @@ extension FolloverListViewController: UICollectionViewDelegate {
         let contentOffsetY: CGFloat = scrollView.contentOffset.y
         let height: CGFloat = scrollView.bounds.size.height
         
-        if (contentOffsetY > contentHeight - height) && hasMoreFollowers {
+        if (contentOffsetY > contentHeight - height) && hasMoreFollowers && !isLoadingInProcess {
             page += 1
             fetchFollowers(userName: userName, page: page)
         }
@@ -208,23 +211,13 @@ extension FolloverListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            isSearching = false
+            updateData(on: followers)
             return
         }
         isSearching = true
         filteredFollowers = followers.filter({$0.login.lowercased().contains(filter.lowercased())})
         updateData(on: filteredFollowers)
-    }
-}
-
-// MARK: - UISearchBarDelegate
-
-extension FolloverListViewController: UISearchBarDelegate {
-    
-    // MARK: - Functions
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        isSearching = false
-        updateData(on: followers)
     }
 }
 
@@ -240,7 +233,7 @@ extension FolloverListViewController: DetailsViewControllerDelegate {
         followers.removeAll()
         filteredFollowers.removeAll()
         page = 1
-        collectionView.setContentOffset(.zero, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
         fetchFollowers(userName: userName, page: page)
     }
 }

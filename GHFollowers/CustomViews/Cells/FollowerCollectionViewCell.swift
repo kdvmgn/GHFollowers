@@ -39,7 +39,7 @@ class FollowerCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarImageView.image = #imageLiteral(resourceName: "avatar-placeholder")
+        avatarImageView.image = Images.placeholder
     }
     // MARK: - Private functions
     
