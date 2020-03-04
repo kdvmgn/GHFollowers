@@ -59,7 +59,8 @@ class GHAlertViewController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissController))
         view.addGestureRecognizer(tapGesture)
-        view.addSubviews(containerView, titleLabel, actionButton, messageLabel)
+        view.addSubviews(containerView)
+        containerView.addSubviews(titleLabel, actionButton, messageLabel)
     }
     
     private func configureContainerView() {

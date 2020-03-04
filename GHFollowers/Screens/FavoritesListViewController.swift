@@ -21,6 +21,7 @@ class FavoritesListViewController: GHDataLoadingViewController {
         tableView.delegate = self
         tableView.register(FavoriteTableViewCell.self,
                            forCellReuseIdentifier: FavoriteTableViewCell.reusableID)
+        tableView.removeExcessCells()
         return tableView
     }()
 
@@ -55,7 +56,7 @@ class FavoritesListViewController: GHDataLoadingViewController {
     }
     
     private func retriveFavorites() {
-        PersistanceManager.retriveFavorites { [weak self] result in
+        PersistenceManager.retriveFavorites { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -121,11 +122,11 @@ extension FavoritesListViewController: UITableViewDelegate {
         let favorite = favorites[indexPath.row]
         favorites.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
-        PersistanceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
-            guard let self = self, let error = error else {
+        PersistenceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
+            guard let error = error else {
                 return
             }
-            self.presentGHAlert(title: "Something wrong", message: error.rawValue, buttonTitle: "OK")
+            self?.presentGHAlert(title: "Something wrong", message: error.rawValue, buttonTitle: "OK")
         }
     }
 }

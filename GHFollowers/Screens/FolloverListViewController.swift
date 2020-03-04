@@ -160,7 +160,7 @@ class FolloverListViewController: GHDataLoadingViewController {
             switch result {
             case .success(let user):
                 let user = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                PersistanceManager.updateWith(favorite: user, actionType: .add) { [weak self] (error) in
+                PersistenceManager.updateWith(favorite: user, actionType: .add) { [weak self] (error) in
                     if let error = error {
                         self?.presentGHAlert(title: "Something went wrong",
                                        message: error.rawValue,

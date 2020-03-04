@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum PersistaceActionType {
+enum PersisteceActionType {
     case add, remove
 }
 
-class PersistanceManager {
+class PersistenceManager {
     
     // MARK: - Nested constants
     
@@ -52,24 +52,23 @@ class PersistanceManager {
     }
     
     static func updateWith(favorite: Follower,
-                           actionType: PersistaceActionType,
+                           actionType: PersisteceActionType,
                            completionHandler: @escaping (GHError?) -> Void) {
         retriveFavorites { (result) in
             switch result {
-            case .success(let favorites):
-                var retrivedFavorites: [Follower] = favorites
+            case .success(var favorites):
                 switch actionType {
                 case .add:
-                    if !retrivedFavorites.contains(favorite) {
-                        retrivedFavorites.append(favorite)
+                    if !favorites.contains(favorite) {
+                        favorites.append(favorite)
                     } else {
                         completionHandler(.alreadyFovorited)
                     }
                 case .remove:
-                    retrivedFavorites.removeAll(where: {$0.login == favorite.login})
-                    completionHandler(save(favorites: retrivedFavorites))
+                    favorites.removeAll(where: {$0.login == favorite.login})
+                    completionHandler(save(favorites: favorites))
                 }
-                completionHandler(save(favorites: retrivedFavorites))
+                completionHandler(save(favorites: favorites))
             case .failure(let error):
                 completionHandler(error)
             }
