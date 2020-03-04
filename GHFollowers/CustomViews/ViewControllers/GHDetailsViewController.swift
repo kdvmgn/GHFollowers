@@ -49,12 +49,7 @@ class GHDetailsViewController: UIViewController {
     // MARK: - Private functions
     
     private func setupView() {
-        view.addSubview(avatarImageView)
-        view.addSubview(userNameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
+        view.addSubviews(avatarImageView, userNameLabel, nameLabel, locationImageView, locationLabel, bioLabel)
     }
     
     private func setupLayout() {
@@ -90,7 +85,7 @@ class GHDetailsViewController: UIViewController {
             bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60.0)
+            bioLabel.heightAnchor.constraint(equalToConstant: 90.0)
         ])
     }
     

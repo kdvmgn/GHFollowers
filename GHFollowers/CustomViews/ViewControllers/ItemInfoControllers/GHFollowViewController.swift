@@ -18,6 +18,17 @@ class GHFollowViewController: GHItemInfoViewController {
     
     weak var delegate: GHFollowViewControllerDelegate?
     
+    // MARK: - Initializer
+    
+    init(user: User, delegate: GHFollowViewControllerDelegate?) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {

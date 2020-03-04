@@ -70,7 +70,7 @@ class DetailsViewController: GHDataLoadingViewController {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180.0),
+            headerView.heightAnchor.constraint(equalToConstant: 210.0),
             
             repoView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             repoView.heightAnchor.constraint(equalToConstant: itemHeight),
@@ -112,13 +112,9 @@ class DetailsViewController: GHDataLoadingViewController {
     
     private func updateInfo(for user: User) {
         DispatchQueue.main.async {
-            let repoViewController = GHRepoViewController(user: user)
-            repoViewController.delegate = self
-            let followViewController = GHFollowViewController(user: user)
-            followViewController.delegate = self
             self.add(childViewController: GHDetailsViewController(user: user), to: self.headerView)
-            self.add(childViewController: repoViewController, to: self.repoView)
-            self.add(childViewController: followViewController, to: self.followView)
+            self.add(childViewController: GHRepoViewController(user: user, delegate: self), to: self.repoView)
+            self.add(childViewController: GHFollowViewController(user: user, delegate: self), to: self.followView)
             self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
         }
     }
