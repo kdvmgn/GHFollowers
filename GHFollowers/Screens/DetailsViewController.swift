@@ -16,6 +16,10 @@ class DetailsViewController: GHDataLoadingViewController {
     
     // MARK: - Properties
     
+    let scrollView = UIScrollView()
+    
+    let contentView = UIView()
+    
     let userName: String
     
     let headerView = UIView()
@@ -46,6 +50,7 @@ class DetailsViewController: GHDataLoadingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setupScrollView()
         setupView()
         configureDoneButton()
         getUser()
@@ -53,23 +58,36 @@ class DetailsViewController: GHDataLoadingViewController {
     
     // MARK: - Private functions
     
+    private func setupScrollView() {
+        scrollView.backgroundColor = .systemBackground
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.pintToEdges(of: view)
+        contentView.pintToEdges(of: scrollView)
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        ])
+    }
+    
     private func setupView() {
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 140
         containerViews = [headerView, repoView, followView, dateLabel]
         
         containerViews.forEach({
-            view.addSubview($0)
+            contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+                $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+                $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding)
             ])
         })
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 210.0),
             
             repoView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
@@ -79,7 +97,8 @@ class DetailsViewController: GHDataLoadingViewController {
             followView.heightAnchor.constraint(equalToConstant: itemHeight),
             
             dateLabel.topAnchor.constraint(equalTo: followView.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18.0)
+            dateLabel.heightAnchor.constraint(equalToConstant: 18.0),
+            dateLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -20.0)
         ])
     }
     
