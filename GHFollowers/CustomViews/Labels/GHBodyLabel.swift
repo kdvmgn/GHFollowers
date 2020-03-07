@@ -21,11 +21,10 @@ class GHBodyLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(text: String? = nil, textAlignment: NSTextAlignment) {
-        super.init(frame: .zero)
+    convenience init(text: String? = nil, textAlignment: NSTextAlignment) {
+        self.init(frame: .zero)
         self.text = text
         self.textAlignment = textAlignment
-        configure()
     }
     
     // MARK: - Private functions
@@ -34,6 +33,7 @@ class GHBodyLabel: UILabel {
         textColor = .secondaryLabel
         font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontSizeToFitWidth = true
+        adjustsFontForContentSizeCategory = true
         minimumScaleFactor = 0.75
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false

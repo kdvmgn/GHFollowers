@@ -26,7 +26,7 @@ class GHAlertViewController: UIViewController {
     
     lazy var messageLabel = GHBodyLabel(text: messageTitle, textAlignment: .center)
     
-    lazy var actionButton = GHButton(backgroundColor: .systemPink, title: "OK")
+    lazy var actionButton = GHButton(backgroundColor: .systemPink, title: buttonTitle)
     
     // MARK: - Initializer
     
@@ -45,7 +45,7 @@ class GHAlertViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViw()
+        configureView()
         configureContainerView()
         configureTitleLabel()
         configureButton()
@@ -55,15 +55,15 @@ class GHAlertViewController: UIViewController {
     
     // MARK: - Private functions
     
-    private func configureViw() {
+    private func configureView() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissController))
         view.addGestureRecognizer(tapGesture)
+        view.addSubviews(containerView)
+        containerView.addSubviews(titleLabel, actionButton, messageLabel)
     }
     
     private func configureContainerView() {
-        view.addSubview(containerView)
-        
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -72,7 +72,6 @@ class GHAlertViewController: UIViewController {
     }
 
     private func configureTitleLabel() {
-        containerView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
@@ -81,7 +80,6 @@ class GHAlertViewController: UIViewController {
     }
     
     private func configureButton() {
-        containerView.addSubview(actionButton)
         actionButton.addTarget(self, action: #selector(dismissController), for: .touchUpInside)
         NSLayoutConstraint.activate([
             actionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
@@ -92,7 +90,6 @@ class GHAlertViewController: UIViewController {
     }
     
     private func configureMessageLabel() {
-        containerView.addSubview(messageLabel)
         messageLabel.numberOfLines = 0
         NSLayoutConstraint.activate([
             messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),

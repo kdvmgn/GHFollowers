@@ -1,33 +1,33 @@
 //
-//  FollowerCollectionViewCell.swift
+//  FavoriteTableViewCell.swift
 //  GHFollowers
 //
-//  Created by Дмитрий Кулешов on 19.01.2020.
+//  Created by Дмитрий Кулешов on 01.03.2020.
 //  Copyright © 2020 Dmitry Kuleshov. All rights reserved.
 //
 
 import UIKit
 
-protocol FollowerCellProtocol {
-    func configureFor(follower: Follower)
+protocol FavoriteCellProtocol {
+    func configureFor(favotite: Follower)
 }
 
-class FollowerCollectionViewCell: UICollectionViewCell {
-    
+class FavoriteTableViewCell: UITableViewCell {
+
     // MARK: - Static properties
     
-    static let reusableID = "FollowerCollectionViewCell"
+    static let reusableID = "FavoriteTableViewCell"
     
     // MARK: - Properties
     
     let avatarImageView = GHAvatarImageView(frame: .zero)
     
-    let usernameLabel = GHTitleLabel(textAlignment: .center, fontSize: 16.0)
+    let usernameLabel = GHTitleLabel(textAlignment: .left, fontSize: 26.0)
     
     // MARK: - Initiaizer
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
     
@@ -41,21 +41,25 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         avatarImageView.image = Images.placeholder
     }
+    
     // MARK: - Private functions
     
     private func configure() {
         addSubviews(avatarImageView, usernameLabel)
-        let padding: CGFloat = 8.0
+        accessoryType = .disclosureIndicator
+        
+        let padding: CGFloat = 12.0
+        
         NSLayoutConstraint.activate([
             avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            avatarImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            avatarImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 60),
             
-            usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12.0),
-            usernameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 24),
             usernameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            usernameLabel.heightAnchor.constraint(equalToConstant: 24.0)
+            usernameLabel.heightAnchor.constraint(equalToConstant: 40.0),
+            usernameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
@@ -68,14 +72,14 @@ class FollowerCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - FollowerCellProtocol
+// MARK: - FavoriteCellProtocol
 
-extension FollowerCollectionViewCell: FollowerCellProtocol {
+extension FavoriteTableViewCell: FavoriteCellProtocol {
     
     // MARK: - Functions
     
-    func configureFor(follower: Follower) {
-        usernameLabel.text = follower.login
-        downloadAvatarImage(from: follower.avatarUrl)
+    func configureFor(favotite: Follower) {
+        usernameLabel.text = favotite.login
+        downloadAvatarImage(from: favotite.avatarUrl)
     }
 }

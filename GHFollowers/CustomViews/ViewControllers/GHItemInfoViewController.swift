@@ -51,9 +51,7 @@ class GHItemInfoViewController: UIViewController {
     }
     
     private func setupView() {
-        view.addSubview(stackView)
-        view.addSubview(actionButton)
-        
+        view.addSubviews(stackView, actionButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         let padding: CGFloat = 20.0
         

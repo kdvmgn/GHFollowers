@@ -49,12 +49,7 @@ class GHDetailsViewController: UIViewController {
     // MARK: - Private functions
     
     private func setupView() {
-        view.addSubview(avatarImageView)
-        view.addSubview(userNameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
+        view.addSubviews(avatarImageView, userNameLabel, nameLabel, locationImageView, locationLabel, bioLabel)
     }
     
     private func setupLayout() {
@@ -90,18 +85,26 @@ class GHDetailsViewController: UIViewController {
             bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60.0)
+            bioLabel.heightAnchor.constraint(equalToConstant: 90.0)
         ])
     }
     
     private func configureView() {
-        avatarImageView.fetchImage(from: user.avatarUrl)
+        downloadAvatarImage()
         userNameLabel.text = user.login
         nameLabel.text = user.name ?? ""
         locationLabel.text = user.location ?? "No location"
         bioLabel.text = user.bio ?? "No bio availiable"
         bioLabel.numberOfLines = 3
-        locationImageView.image = UIImage(systemName: SFSymbols.location)
+        locationImageView.image = SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
+    }
+    
+    private func downloadAvatarImage() {
+        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] (image) in
+            DispatchQueue.main.async {
+                self?.avatarImageView.image = image
+            }
+        }
     }
 }
