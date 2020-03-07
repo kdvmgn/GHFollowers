@@ -83,6 +83,19 @@ class FolloverListViewController: GHDataLoadingViewController {
         collectionView.delegate = self
     }
     
+    private func configureSearchController () {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for a username"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+    }
+    
+    private func configureAddButton() {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
     private func setupDataSource() {
         dataSource = UICollectionViewDiffableDataSource<FollowersSection, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCollectionViewCell.reusableID, for: indexPath)
@@ -112,18 +125,7 @@ class FolloverListViewController: GHDataLoadingViewController {
             self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                print("Followers.count = \(followers.count)")
-                print(followers)
-                self.hasMoreFollowers = followers.count == 100
-                self.followers.append(contentsOf: followers)
-                if self.followers.isEmpty {
-                    let message = "This user doesn't have any followers. Go follow them 😀"
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: message, in: self.view)
-                    }
-                    return
-                }
-                self.updateData(on: self.followers )
+                self.updateInterface(with: followers)
             case .failure(let error):
                 self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")
             }
@@ -131,17 +133,17 @@ class FolloverListViewController: GHDataLoadingViewController {
         }
     }
     
-    private func configureSearchController () {
-        let searchController = UISearchController()
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search for a username"
-        searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
-    }
-    
-    private func configureAddButton() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched))
-        navigationItem.rightBarButtonItem = addButton
+    private func updateInterface(with followers: [Follower]) {
+        self.hasMoreFollowers = followers.count == 100
+        self.followers.append(contentsOf: followers)
+        if self.followers.isEmpty {
+            let message = "This user doesn't have any followers. Go follow them 😀"
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+            }
+            return
+        }
+        self.updateData(on: self.followers )
     }
     
     private func showInfo(for userName: String) {
@@ -149,6 +151,21 @@ class FolloverListViewController: GHDataLoadingViewController {
         userDetailsViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: userDetailsViewController)
         present(navigationController, animated: true)
+    }
+    
+    private func updatePersisted(user: User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] (error) in
+            if let error = error {
+                self?.presentGHAlert(title: "Something went wrong",
+                                     message: error.rawValue,
+                                     buttonTitle: "OK")
+                return
+            }
+            self?.presentGHAlert(title: "Success!",
+                                 message: "You have successfully favorited this user",
+                                 buttonTitle: "Hoooray 🥳")
+        }
     }
     
      // MARK: - Actions
@@ -159,17 +176,7 @@ class FolloverListViewController: GHDataLoadingViewController {
             self?.dismissLoadingView()
             switch result {
             case .success(let user):
-                let user = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                PersistenceManager.updateWith(favorite: user, actionType: .add) { [weak self] (error) in
-                    if let error = error {
-                        self?.presentGHAlert(title: "Something went wrong",
-                                       message: error.rawValue,
-                                       buttonTitle: "OK")
-                    }
-                    self?.presentGHAlert(title: "Success!",
-                                         message: "You have successfully favorited this user",
-                                         buttonTitle: "Hoooray 🥳")
-                }
+                self?.updatePersisted(user: user)
             case .failure(let error):
                 self?.presentGHAlert(title: "Something went wrong!",
                                      message: error.rawValue,

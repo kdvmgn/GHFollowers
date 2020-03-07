@@ -53,6 +53,7 @@ class SearchViewController: UIViewController {
     private func configureLogoImage() {
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.image = Images.ghLogo
+        
         let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20.0 : 80.0
         NSLayoutConstraint.activate([
             logoImage.widthAnchor.constraint(equalToConstant: 200),
@@ -93,6 +94,8 @@ class SearchViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 
 extension SearchViewController: UITextFieldDelegate {
+    
+    // MARK: - Functions
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushFollowersListViewController()

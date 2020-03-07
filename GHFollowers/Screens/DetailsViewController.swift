@@ -114,7 +114,6 @@ class DetailsViewController: GHDataLoadingViewController {
             }
             switch result {
             case .success(let user):
-                print("User = \(user)")
                 self.updateInfo(for: user)
             case .failure(let error):
                 self.presentGHAlert(title: "Bad stuff happend", message: error.rawValue, buttonTitle: "OK")

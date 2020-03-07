@@ -10,6 +10,8 @@ import UIKit
 
 extension UITableView {
     
+    // MARK: - Functions
+    
     func removeExcessCells() {
         tableFooterView = UIView(frame: .zero)
     }

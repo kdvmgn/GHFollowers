@@ -62,17 +62,21 @@ class FavoritesListViewController: GHDataLoadingViewController {
             }
             switch result {
             case .success(let favorites):
-                DispatchQueue.main.async {
-                    self.favorites = favorites
-                    if favorites.isEmpty {
-                        self.showEmptyStateView(with: "There are no favorites yet. Add them at the search tab", in: self.view)
-                    } else {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
+                self.updateInterface(with: favorites)
             case .failure(let error):
                 self.presentGHAlert(title: "Something wrong", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
+    }
+    
+    private func updateInterface(with favorites: [Follower]) {
+        self.favorites = favorites
+        DispatchQueue.main.async {
+            if favorites.isEmpty {
+                self.showEmptyStateView(with: "There are no favorites yet. Add them at the search tab", in: self.view)
+            } else {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
             }
         }
     }

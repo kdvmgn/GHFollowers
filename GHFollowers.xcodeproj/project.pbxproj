@@ -19,7 +19,6 @@
 		57491A5223E9A18B000E2DC8 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57491A5123E9A18B000E2DC8 /* DetailsViewController.swift */; };
 		5770567E23C88A8A00DCEF7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770567D23C88A8A00DCEF7A /* AppDelegate.swift */; };
 		5770568023C88A8A00DCEF7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770567F23C88A8A00DCEF7A /* SceneDelegate.swift */; };
-		5770568223C88A8A00DCEF7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770568123C88A8A00DCEF7A /* ViewController.swift */; };
 		5770568723C88A8C00DCEF7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5770568623C88A8C00DCEF7A /* Assets.xcassets */; };
 		5770568A23C88A8C00DCEF7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5770568823C88A8C00DCEF7A /* LaunchScreen.storyboard */; };
 		5770569223C8A42A00DCEF7A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770569123C8A42A00DCEF7A /* SearchViewController.swift */; };
@@ -61,7 +60,6 @@
 		5770567A23C88A8A00DCEF7A /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5770567D23C88A8A00DCEF7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5770567F23C88A8A00DCEF7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5770568123C88A8A00DCEF7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5770568623C88A8C00DCEF7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5770568923C88A8C00DCEF7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5770568B23C88A8C00DCEF7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 		5701938323CCC520007215A7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				5770568123C88A8A00DCEF7A /* ViewController.swift */,
 				5770569123C8A42A00DCEF7A /* SearchViewController.swift */,
 				5770569323C8A44000DCEF7A /* FavoritesListViewController.swift */,
 				5770569A23C8CC2800DCEF7A /* FolloverListViewController.swift */,
@@ -374,7 +371,6 @@
 				9EF70B1F240BEC97001284F3 /* FavoriteTableViewCell.swift in Sources */,
 				9EF18F5D23D78BF3000AC3DB /* UIHelper.swift in Sources */,
 				5701937A23CC64AB007215A7 /* GHTitleLabel.swift in Sources */,
-				5770568223C88A8A00DCEF7A /* ViewController.swift in Sources */,
 				9E5FD09A23CCF69B00C12477 /* NetworkManager.swift in Sources */,
 				5770567E23C88A8A00DCEF7A /* AppDelegate.swift in Sources */,
 				9EF70B22240C070A001284F3 /* GHTabBarController.swift in Sources */,
